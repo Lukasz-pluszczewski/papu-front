@@ -3,6 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "body-parser": "1.18.3",
+    "compression": "1.7.3",
+    "cors": "2.8.5",
+    "express": "4.16.4",
+    "@babel/cli": "7.1.5",
+    "@babel/core": "7.1.6",
+    "@babel/node": "7.0.0",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/plugin-proposal-decorators": "7.1.6",
+    "@babel/preset-env": "7.1.6",
+    "@babel/preset-stage-0": "7.0.0"
+  },
+  "devDependencies": {
     "antd": "^3.10.1",
     "chart.js": "^2.7.3",
     "classnames": "^2.2.6",
@@ -28,18 +41,7 @@
     "redux-breeze-plugin-better-promise": "^2.0.0",
     "redux-immutable-state-invariant": "^2.1.0",
     "serve": "^10.0.2",
-    "why-did-you-update": "^1.0.6",
-    "body-parser": "1.18.3",
-    "compression": "1.7.3",
-    "cors": "2.8.5",
-    "express": "4.16.4",
-    "@babel/cli": "7.1.5",
-    "@babel/core": "7.1.6",
-    "@babel/node": "7.0.0",
-    "@babel/plugin-proposal-class-properties": "7.1.0",
-    "@babel/plugin-proposal-decorators": "7.1.6",
-    "@babel/preset-env": "7.1.6",
-    "@babel/preset-stage-0": "7.0.0"
+    "why-did-you-update": "^1.0.6"
   },
   "scripts": {
     "start": "REACT_APP_ENV=development react-scripts start",
