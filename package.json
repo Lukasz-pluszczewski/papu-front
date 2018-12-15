@@ -1,0 +1,64 @@
+{
+  "name": "expenses-analyser-front",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.10.1",
+    "chart.js": "^2.7.3",
+    "classnames": "^2.2.6",
+    "eslint-config-brainhub": "Lukasz-pluszczewski/eslint-config-brainhub",
+    "javascript-stringify": "^1.6.0",
+    "lodash": "^4.17.11",
+    "luxon": "^1.4.3",
+    "moment": "^2.22.2",
+    "node-sass": "^4.9.4",
+    "perfect-immutable": "2.0.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.0",
+    "react-chartjs-2": "^2.7.4",
+    "react-dom": "^16.6.0",
+    "react-redux": "^6.0.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "2.0.5",
+    "redux": "^4.0.1",
+    "redux-better-promise": "^1.0.1",
+    "redux-breeze": "^4.0.3",
+    "redux-breeze-plugin-better-promise": "^2.0.0",
+    "redux-immutable-state-invariant": "^2.1.0",
+    "serve": "^10.0.2",
+    "why-did-you-update": "^1.0.6",
+    "body-parser": "1.18.3",
+    "compression": "1.7.3",
+    "cors": "2.8.5",
+    "express": "4.16.4",
+    "@babel/cli": "7.1.5",
+    "@babel/core": "7.1.6",
+    "@babel/node": "7.0.0",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/plugin-proposal-decorators": "7.1.6",
+    "@babel/preset-env": "7.1.6",
+    "@babel/preset-stage-0": "7.0.0"
+  },
+  "scripts": {
+    "start": "REACT_APP_ENV=development react-scripts start",
+    "build": "REACT_APP_ENV=production react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "production": "npm run build && npm run serve",
+    "serve": "NODE_PATH=src ENV=production node src/server.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "brainhub"
+    ]
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

@@ -1,0 +1,92 @@
+@import "../../styles/variables";
+
+.PlansToolbox {
+  padding: 1em;
+
+  .PlansToolbox__row {
+    display: flex;
+    padding-top: .5em;
+    padding-bottom: .5em;
+
+    .PlansToolbox__group {
+      display: flex;
+    }
+
+    .PlansToolbox__numberOfDaysInput {
+      margin-right: 1em;
+      width: 40px;
+      &.ant-input-number {
+        .ant-input-number-handler-wrap {
+          width: 100%;
+          opacity: 1;
+          .ant-input-number-handler-down-inner, .ant-input-number-handler-up-inner {
+            right: 13px;
+          }
+        }
+        .ant-input-number-input-wrap {
+          visibility: hidden;
+        }
+      }
+    }
+
+    .PlansToolbox__numberOfDaysSelect {
+      display: none;
+    }
+
+    .PlansToolbox__generatePlanButton {
+      margin-right: 1em;
+    }
+
+    .PlansToolbox__selectPlan {
+      width: 240px;
+    }
+
+    .PlansToolbox__nativeSelectPlan {
+      display: none;
+    }
+
+    .PlansToolbox__generatedNumberOfDays {
+      line-height: 32px;
+      margin-right: 1em;
+    }
+
+    .PlansToolbox__planTitleInput {
+      width: 160px;
+      margin-right: 1em;
+    }
+
+    .PlansToolbox__savePlanButton {
+      margin-right: 1em;
+    }
+
+    @include mobile {
+      flex-direction: column;
+
+      .PlansToolbox__numberOfDaysInput {
+        display: none;
+      }
+
+      .PlansToolbox__numberOfDaysSelect {
+        display: block;
+        margin-right: 1em;
+      }
+
+      .PlansToolbox__selectPlan {
+        display: none;
+      }
+
+      .PlansToolbox__nativeSelectPlan {
+        display: block;
+      }
+
+      .PlansToolbox__generatePlanButton,
+      .PlansToolbox__generatedNumberOfDays,
+      .PlansToolbox__planTitleInput,
+      .PlansToolbox__savePlanButton {
+        margin-bottom: 1em;
+        margin-right: 0;
+        width: 100%;
+      }
+    }
+  }
+}

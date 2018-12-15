@@ -1,0 +1,25 @@
+@media print {
+  body {
+    .header {
+      display: none;
+    }
+    .ant-layout {
+      padding: 0 !important;
+    }
+    .ant-breadcrumb {
+      display: none;
+    }
+    .PlansToolbox {
+      display: none;
+    }
+
+    .ant-calendar-picker {
+      input {
+        border: none;
+      }
+      .anticon {
+        display: none;
+      }
+    }
+  }
+}

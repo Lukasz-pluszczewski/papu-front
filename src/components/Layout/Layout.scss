@@ -1,0 +1,34 @@
+@import "../../styles/variables";
+.Layout {
+  .Layout__sider {
+    background: #fff;
+    padding: 24px;
+    margin: 0;
+  }
+  .Layout__layout {
+    padding: 0 24px 24px;
+    .Layout__breadcrumb {
+      margin: 16px 0;
+    }
+    .Layout__contentContainer {
+      background: #fff;
+      padding: 24px;
+      margin: 0;
+      minHeight: 280px;
+      .Layout__content {
+
+      }
+    }
+  }
+
+  @include mobile {
+    .Layout__sider {
+      padding-left: 5px;
+      padding-right: 0;
+      z-index: 10;
+    }
+    .Layout__layout {
+      padding: 0 10px 24px;
+    }
+  }
+}

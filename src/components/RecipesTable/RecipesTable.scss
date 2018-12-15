@@ -1,0 +1,66 @@
+@import "../../styles/variables";
+
+.RecipesTable {
+  .RecipesTable__table {
+    width: 100%;
+    .RecipesTable__row {
+
+      &.RecipesTable__titleRow {
+        border-top: 1px solid black;
+        font-weight: bold;
+      }
+
+      &.RecipesTable__recipeRow {
+        border-bottom: 1px solid black;
+      }
+
+      &.RecipesTable__ingredientsRow {
+        pre {
+          font-family: inherit;
+        }
+      }
+
+      .RecipesTable__column {
+        //border-left: 1px solid black;
+        //border-right: 1px solid black;
+        padding: 1em;
+        vertical-align: top;
+
+        .RecipesTable__multiplierSelect {
+          display: none;
+        }
+      }
+    }
+  }
+
+
+  @include mobile {
+    max-width: calc(100% + 2em);
+    overflow-x: auto;
+    margin-left: -1em;
+    margin-right: -1em;
+
+    .RecipesTable__table{
+      .RecipesTable__row {
+        .RecipesTable__column {
+          padding: 0.4em;
+
+          .ant-calendar-picker {
+            .ant-calendar-picker-input {
+              padding: 4px 7px;
+            }
+            .anticon {
+              display: none;
+            }
+          }
+          .RecipesTable__multiplierSelect {
+            display: block;
+          }
+          .RecipesTable__multiplierInput {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
