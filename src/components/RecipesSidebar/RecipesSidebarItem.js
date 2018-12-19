@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { SUPPER, DINNER, SNACK, BREAKFAST} from '../../constants/recipeTypes';
 import { Popconfirm, Icon, List } from 'antd';
+
+const recipeTypes = {
+  [BREAKFAST]: 'Breakfast',
+  [SNACK]: 'Snack',
+  [DINNER]: 'Dinner',
+  [SUPPER]: 'Supper',
+};
 
 class RecipesSidebar extends Component {
   static propTypes = {
@@ -24,7 +32,7 @@ class RecipesSidebar extends Component {
         <Popconfirm placement="topLeft" title="Are you sure you want to delete this recipe?" onConfirm={this.handleDelete} okText="Delete" cancelText="Cancel">
           <Icon className="RecipesSidebar__remove-recipe-icon" type="close" />
         </Popconfirm>
-        <a onClick={this.handleItemClick}>{this.props.item.title}</a>
+        <a onClick={this.handleItemClick}>{`${this.props.item.title} (${recipeTypes[this.props.item.type]})`}</a>
       </List.Item>
     );
   }

@@ -7,29 +7,29 @@ import _ from 'lodash';
  * @type {{kg: {names: [string], derivatives: [null]}}}
  */
 export const quantities = {
-  kg: {
-    names: ['kg', 'kilogramów', 'kilograma', 'kilogram'],
+  g: {
+    names: ['g', 'gramów', 'grama', 'gramy'],
     derivatives: {
       g: {
-        names: ['g', 'gramów', 'grama', 'gramy'],
-        ratio: 1 / 1000,
+        names: ['kg', 'kilogramów', 'kilograma', 'kilogram'],
+        ratio: 1000,
       },
       mg: {
         names: ['mg', 'miligramów', 'miligrama', 'miligramy'],
-        ratio: 1 / 1000000,
+        ratio: 1 / 1000,
       },
     },
   },
-  l: {
-    names: ['l', 'litr', 'litrów', 'litra'],
+  ml: {
+    names: ['ml', 'mililitrów', 'mililitra', 'mililitry'],
     derivatives: {
       ml: {
-        names: ['ml', 'mililitrów', 'mililitra', 'mililitry'],
-        ratio: 1 / 1000,
+        names: ['l', 'litr', 'litrów', 'litra'],
+        ratio: 1000,
       },
       szklanka: {
         names: ['szklanka', 'szklanek', 'szklanki'],
-        ratio: 1 / 4,
+        ratio: 250,
       },
     },
   },

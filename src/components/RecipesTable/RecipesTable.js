@@ -4,6 +4,7 @@ import _ from 'lodash';
 import classnames from 'classnames';
 import moment from 'moment';
 
+import { DINNER, BREAKFAST, SUPPER, SNACK } from '../../constants/recipeTypes';
 import NativeSelect from '../NativeSelect/NativeSelect';
 import { DatePicker, InputNumber } from 'antd';
 
@@ -11,12 +12,12 @@ import './RecipesTable.scss';
 
 const NativeOption = NativeSelect.Option;
 
-const types = {
-  0: 'Breakfast',
-  3: 'Snack',
-  1: 'Dinner',
-  2: 'Supper',
-};
+const types = [
+  { name: 'Breakfast', index: BREAKFAST },
+  { name: 'Snack', index: SNACK },
+  { name: 'Dinner', index: DINNER },
+  { name: 'Supper', index: SUPPER },
+];
 
 const dayFormat = 'dddd D.MM';
 
@@ -93,7 +94,7 @@ class RecipesTable extends Component {
               </td>
               {_.times(this.props.length - 1, i => <td key={i}>{moment(this.props.firstDay).add(i + 1, 'day').format(dayFormat)}</td>)}
             </tr>
-            {_.map(types, (typeName, typeIndex) => {
+            {_.map(types, ({ index: typeIndex }) => {
               const recipes = this.props.data[typeIndex];
               if (recipes && recipes.length) {
                 return (
