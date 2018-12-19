@@ -2,7 +2,7 @@ import _ from 'lodash';
 import request from './request';
 import ingredientService from './ingredientService';
 
-export const quantityPattern = /(\d+)[ ]{0,1}(szt|sztuk|sztuki|g|gram|kg|łyżka|łyżek|łyżki|szklanka|szklanek|szklanki|litr|litry|litrów|litrow|l|ml|mililitrów|mililitry|liści|liść|liścia|kromka|kromek|kromki).?/g; // eslint-disable-line max-len
+export const quantityPattern = /([\d,.]+)[ ]{0,1}(szt|sztuk|sztuki|g|gram|kg|łyżka|łyżek|łyżki|szklanka|szklanek|szklanki|litr|litry|litrów|litrow|l|ml|mililitrów|mililitry|liści|liść|liścia|kromka|kromek|kromki).?/g; // eslint-disable-line max-len
 
 export const replace = (string, patterns, replacement = '') => {
   let result = string;

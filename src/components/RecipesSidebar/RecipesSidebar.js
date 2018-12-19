@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import stringify from 'javascript-stringify';
 
+import RecipeDetails from '../RecipeDetails/RecipeDetails';
 import RecipesSidebarItem from './RecipesSidebarItem';
 import { Modal, List } from 'antd';
 
@@ -39,6 +40,14 @@ class RecipesSidebar extends Component {
     this.props.deleteRecipe(item);
   };
 
+  renderItem = item => (
+    <RecipesSidebarItem
+      item={item}
+      onDelete={this.handleDelete}
+      onRecipeClick={this.openModal}
+    />
+  );
+
   render() {
     const modalVisible = this.state.modalVisible;
 
@@ -48,15 +57,7 @@ class RecipesSidebar extends Component {
           className="RecipesSidebar"
           header={<div><h4>Recipes</h4></div>}
           dataSource={this.props.recipes}
-          renderItem={
-            item => (
-              <RecipesSidebarItem
-                item={item}
-                onDelete={this.handleDelete}
-                onRecipeClick={this.openModal}
-              />
-            )
-          }
+          renderItem={this.renderItem}
           loading={this.props.loading}
         />
         <Modal
@@ -66,7 +67,7 @@ class RecipesSidebar extends Component {
           confirmLoading={false}
           onCancel={this.handleCancelModal}
         >
-          <pre>{stringify(this.state.recipeOpened && this.state.recipeOpened.title, null, 2)}</pre>
+          <RecipeDetails item={this.state.recipeOpened} />
         </Modal>
       </React.Fragment>
     );
