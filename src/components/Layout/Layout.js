@@ -9,8 +9,8 @@ const { Content, Sider, Footer } = Layout;
 
 class PageLayout extends Component {
   static propTypes = {
-    children: PropTypes.element,
-    sider: PropTypes.element,
+    children: PropTypes.node,
+    sider: PropTypes.node,
     breadcrumbs: PropTypes.arrayOf(PropTypes.string),
     siderWidth: PropTypes.number,
   };

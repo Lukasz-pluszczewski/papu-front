@@ -22,7 +22,10 @@ app.get('/api/config', (req, res) => {
     apiUrl,
   });
 });
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, '../build'), { fallthrough: true }));
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 // starting actual server
 app.server.listen(port);

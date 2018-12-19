@@ -9,6 +9,10 @@ const actionsDefinitions = {
       'result.getRecipes': [],
     },
   },
+  deleteRecipe: {
+    type: 'better-promise',
+    async: id => request.makeRequest('DELETE', `/recipes/${id}`),
+  },
   saveRecipe: {
     type: 'better-promise',
     async: recipe => recipeService.saveRecipe(recipe),

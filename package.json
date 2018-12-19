@@ -3,17 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "body-parser": "1.18.3",
-    "compression": "1.7.3",
-    "cors": "2.8.5",
-    "express": "4.16.4",
     "@babel/cli": "7.1.5",
     "@babel/core": "7.1.6",
     "@babel/node": "7.0.0",
     "@babel/plugin-proposal-class-properties": "7.1.0",
     "@babel/plugin-proposal-decorators": "7.1.6",
     "@babel/preset-env": "7.1.6",
-    "@babel/preset-stage-0": "7.0.0"
+    "@babel/preset-stage-0": "7.0.0",
+    "body-parser": "1.18.3",
+    "compression": "1.7.3",
+    "cors": "2.8.5",
+    "express": "4.16.4",
+    "file-saver": "^2.0.0",
+    "react-file-input": "^0.2.5"
   },
   "devDependencies": {
     "antd": "^3.10.1",
@@ -44,7 +46,7 @@
     "why-did-you-update": "^1.0.6"
   },
   "scripts": {
-    "start": "REACT_APP_ENV=development react-scripts start",
+    "start": "REACT_APP_ENV=development REACT_APP_API_URL=$API_URL react-scripts start",
     "build": "REACT_APP_ENV=production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

@@ -15,10 +15,12 @@ class HomePage extends Component {
     parsedRecipe: PropTypes.object,
     recipeSaving: PropTypes.bool,
     recipesLoading: PropTypes.bool,
+    recipeDeleting: PropTypes.bool,
     parseRecipeLoading: PropTypes.bool,
     getRecipes: PropTypes.func,
     saveRecipe: PropTypes.func,
     parseRecipe: PropTypes.func,
+    deleteRecipe: PropTypes.func,
   };
 
   componentDidMount() {
@@ -50,20 +52,37 @@ class HomePage extends Component {
   load = () => {
     this.props.getRecipes(null, {
       error: () => {
-        console.log('error');
         notification.error('Fetching recipes failed!', 'Your recipes could not be loaded. Try reloading the page.');
       },
     });
   };
 
-  parseRecipe = _.debounce((recipe) => {
+  deleteRecipe = recipe => {
+    this.props.deleteRecipe(
+      recipe._id,
+      {
+        success: () => {
+          this.load();
+
+          notification.success('Successfully deleted', `"${recipe.title}" recipe has been deleted`);
+        },
+        error: () => {
+          notification.error('Deleting failed!', 'Your recipe has not been deleted. Try again.');
+        },
+      }
+    );
+  };
+
+  parseRecipe = _.debounce(recipe => {
     this.props.parseRecipe(recipe);
   }, 1000);
 
   render() {
+    const isLoading = this.props.recipesLoading || this.props.recipeDeleting;
+
     return (
       <Layout
-        sider={<RecipesSidebar recipes={this.props.recipes} loading={this.props.recipesLoading} />}
+        sider={<RecipesSidebar recipes={this.props.recipes} loading={isLoading} deleteRecipe={this.deleteRecipe} />}
         breadcrumbs={['Home']}
       >
         <RecipeForm
@@ -82,6 +101,7 @@ export default connect(
   {
     recipesLoading: 'recipes.pending.getRecipes',
     recipeSaving: 'recipes.pending.saveRecipe',
+    recipeDeleting: 'recipes.pending.deleteRecipe',
     recipes: 'recipes.result.getRecipes',
     parseRecipeLoading: 'recipes.pending.parseRecipe',
     parsedRecipe: 'recipes.result.parseRecipe',
@@ -90,5 +110,6 @@ export default connect(
     getRecipes: getAction('getRecipes'),
     saveRecipe: getAction('saveRecipe'),
     parseRecipe: getAction('parseRecipe'),
+    deleteRecipe: getAction('deleteRecipe'),
   }
 )(HomePage);

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 import stringify from 'javascript-stringify';
 
-import { Popconfirm, Modal, Icon, List } from 'antd';
+import RecipesSidebarItem from './RecipesSidebarItem';
+import { Modal, List } from 'antd';
 
 import './RecipesSidebar.scss';
 
@@ -11,6 +11,7 @@ class RecipesSidebar extends Component {
   static propTypes = {
     recipes: PropTypes.arrayOf(PropTypes.object),
     loading: PropTypes.bool,
+    deleteRecipe: PropTypes.func,
   };
 
   state = {
@@ -18,8 +19,8 @@ class RecipesSidebar extends Component {
     modalVisible: false,
   };
 
-  openModal = recipeId => {
-    this.setState({ modalVisible: true, recipeOpened: recipeId });
+  openModal = recipe => {
+    this.setState({ modalVisible: true, recipeOpened: recipe });
   };
 
   closeModal = () => {
@@ -34,9 +35,12 @@ class RecipesSidebar extends Component {
     this.closeModal();
   };
 
+  handleDelete = item => {
+    this.props.deleteRecipe(item);
+  };
+
   render() {
     const modalVisible = this.state.modalVisible;
-    const activeRecipe = _.find(this.props.recipes, { _id: this.state.recipeOpened }) || {};
 
     return (
       <React.Fragment>
@@ -46,24 +50,23 @@ class RecipesSidebar extends Component {
           dataSource={this.props.recipes}
           renderItem={
             item => (
-              <List.Item>
-                <Popconfirm placement="topLeft" title="Are you sure you want to delete this recipe?" onConfirm={null} okText="Delete" cancelText="Cancel">
-                  <Icon className="RecipesSidebar__remove-recipe-icon" type="close" />
-                </Popconfirm>
-                <a onClick={() => this.openModal(item._id)}>{item.title}</a>
-              </List.Item>
+              <RecipesSidebarItem
+                item={item}
+                onDelete={this.handleDelete}
+                onRecipeClick={this.openModal}
+              />
             )
           }
           loading={this.props.loading}
         />
         <Modal
-          title={activeRecipe.title}
+          title={this.state.recipeOpened && this.state.recipeOpened.title}
           visible={modalVisible}
           onOk={this.handleOkModal}
           confirmLoading={false}
           onCancel={this.handleCancelModal}
         >
-          <pre>{stringify(activeRecipe, null, 2)}</pre>
+          <pre>{stringify(this.state.recipeOpened && this.state.recipeOpened.title, null, 2)}</pre>
         </Modal>
       </React.Fragment>
     );
