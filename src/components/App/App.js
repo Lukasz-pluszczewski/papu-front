@@ -18,6 +18,10 @@ const PlanPage = lazy(() => import(
   /* webpackChunkName: "HomePage" */
   '../../pages/PlanPage'
 ));
+const BackupPage = lazy(() => import(
+  /* webpackChunkName: "BackupPage" */
+  '../../pages/BackupPage'
+  ));
 
 class App extends Component {
 
@@ -30,17 +34,11 @@ class App extends Component {
     let activePage;
 
     switch(window.location.pathname) {
-      case '/ingredients':
-        activePage = 'ingredients';
-        break;
       case '/plan':
         activePage = 'plan';
         break;
-      case '/print-plan':
-        activePage = 'print-plan';
-        break;
-      case '/print-shopping':
-        activePage = 'print-shopping';
+      case '/backup':
+        activePage = 'backup';
         break;
       default:
         activePage = 'home';
@@ -61,6 +59,9 @@ class App extends Component {
               </Menu.Item>
               <Menu.Item key="plan">
                 <Link to="/plan"><Icon type="align-left" />Plan</Link>
+              </Menu.Item>
+              <Menu.Item key="backup">
+                <Link to="/backup"><Icon type="align-left" />Backup</Link>
               </Menu.Item>
             </Menu>
             <Button
@@ -83,6 +84,11 @@ class App extends Component {
                   exact
                   path="/plan"
                   component={PlanPage}
+                />
+                <Route
+                  exact
+                  path="/backup"
+                  component={BackupPage}
                 />
               </Switch>
             </Suspense>

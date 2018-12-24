@@ -49,8 +49,11 @@ class HomePage extends Component {
     );
   };
 
-  load = () => {
-    this.props.getRecipes(null, {
+  load = ({ type, ingredient } = {}) => {
+    if (ingredient) {
+      notification.error('Searching by ingredient not implemented yet!');
+    }
+    this.props.getRecipes({ type }, {
       error: () => {
         notification.error('Fetching recipes failed!', 'Your recipes could not be loaded. Try reloading the page.');
       },
@@ -82,7 +85,18 @@ class HomePage extends Component {
 
     return (
       <Layout
-        sider={<RecipesSidebar recipes={this.props.recipes} loading={isLoading} deleteRecipe={this.deleteRecipe} />}
+        sider={<RecipesSidebar
+          recipes={this.props.recipes}
+          loadRecipes={this.load}
+          loading={isLoading}
+          deleteRecipe={this.deleteRecipe}
+
+          recipeLoading={this.props.recipeSaving}
+          parsing={this.props.parseRecipeLoading}
+          save={this.save}
+          parsedRecipe={this.props.parsedRecipe}
+          parseRecipe={this.parseRecipe}
+        />}
         breadcrumbs={['Home']}
       >
         <RecipeForm

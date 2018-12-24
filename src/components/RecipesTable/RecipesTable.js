@@ -35,8 +35,12 @@ class RecipesTable extends Component {
     return !isPropsEqual;
   };
 
+  handleMultiplierChange = (typeIndex, recipeIndex) => value => {
+    this.props.setMultiplier({ listIndex: parseInt(typeIndex), recipeIndex: parseInt(recipeIndex), value });
+  };
+
   renderRow = (field, recipes, columnStyle) => {
-    switch(field) {
+    switch (field) {
       case 'ingredients':
         return (
           <tr className={classnames('RecipesTable__row', `RecipesTable__${field}Row`)}>
@@ -50,10 +54,6 @@ class RecipesTable extends Component {
           </tr>
         );
     }
-  };
-
-  handleMultiplierChange = (typeIndex, recipeIndex) => (value) => {
-    this.props.setMultiplier({ listIndex: parseInt(typeIndex), recipeIndex: parseInt(recipeIndex), value });
   };
 
   renderMultiplierRow = (recipes, typeIndex, columnStyle) => {
@@ -70,7 +70,7 @@ class RecipesTable extends Component {
             </NativeSelect>
             <InputNumber
               className="RecipesTable__multiplierInput"
-              value={recipe.multiplier || 1}
+              value={_.isNil(recipe.multiplier) ? 1 : recipe.multiplier}
               onChange={this.handleMultiplierChange(typeIndex, recipeIndex)}
             />
           </td>

@@ -3,4 +3,19 @@
     cursor: pointer;
     margin-right: 10px;
   }
+
+  .RecipesSidebar__header {
+    display: flex;
+    justify-content: space-between;
+
+    .RecipesSidebar__headerTitle {
+      margin-right: 1em;
+      height: 32px;
+      line-height: 32px;
+      margin-bottom: 0;
+    }
+    .RecipesSidebar__headerTypeSelect {
+      flex-grow: 1;
+    }
+  }
 }
