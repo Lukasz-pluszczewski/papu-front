@@ -1,14 +1,17 @@
 import _ from 'lodash';
+import qs from 'query-string';
 
 const requestService = {
   apiUrl: '',
   setApiUrl: apiUrl => {
     requestService.apiUrl = apiUrl;
   },
-  makeRequest: (method, path = '/', body = null, queryString = '') => {
+  makeRequest: (method, path = '/', body = null, query = {}) => {
     if (!requestService.apiUrl) {
       return Promise.reject({ message: 'apiUrl has not been set' });
     }
+    const queryString = qs.stringify(query);
+
     const request = new Request(`${requestService.apiUrl}${path}?${queryString}`, {
       method,
       body: _.isPlainObject(body) ? JSON.stringify(body) : body,
@@ -28,10 +31,11 @@ const requestService = {
       ))
       .then(response => response.json());
   },
-  sendFormData: (path, formData, queryString = '') => {
+  sendFormData: (path, formData, query = '') => {
     if (!requestService.apiUrl) {
       return Promise.reject({ message: 'apiUrl has not been set' });
     }
+    const queryString = qs.stringify(query);
     const request = new Request(`${requestService.apiUrl}${path}?${queryString}`, {
       method: 'POST',
       body: formData,
@@ -51,7 +55,8 @@ const requestService = {
       ))
       .then(response => response.json());
   },
-  makeExternalRequest: (method, url, body = null, queryString = '') => {
+  makeExternalRequest: (method, url, body = null, query = '') => {
+    const queryString = qs.stringify(query);
     const request = new Request(`${url}?${queryString}`, {
       method,
       body: body && JSON.stringify(body),

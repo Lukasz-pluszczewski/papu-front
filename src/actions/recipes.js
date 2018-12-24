@@ -4,7 +4,7 @@ import recipeService from '../services/recipeService';
 const actionsDefinitions = {
   getRecipes: {
     type: 'better-promise',
-    async: () => request.makeRequest('GET', '/recipes'),
+    async: query => request.makeRequest('GET', '/recipes', null, query),
     initial: {
       'result.getRecipes': [],
     },

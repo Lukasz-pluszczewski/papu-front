@@ -54,6 +54,7 @@ const recipeService = {
     .parseIngredients(rawRecipe.ingredients)
     .then(ingredientsParsed => {
       const { id, ...recipe } = rawRecipe;
+      console.log('saving', rawRecipe);
       if (id) {
         return request.makeRequest('put', `/recipes/${id}`, { ...recipe, ingredientsParsed });
       }

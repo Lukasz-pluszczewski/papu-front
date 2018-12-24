@@ -87,7 +87,7 @@ const quantitiesService = {
           if (!ingredients[ingredient.ingredient]) {
             ingredients[ingredient.ingredient] = [];
           }
-          ingredients[ingredient.ingredient].push(quantitiesService.normalizeQuantities(ingredient.quantities.map(quantity => ({ ...quantity, quantity: `${parseFloat(quantity.quantity * (recipe.multiplier || 1))}` }))));
+          ingredients[ingredient.ingredient].push(quantitiesService.normalizeQuantities(ingredient.quantities.map(quantity => ({ ...quantity, quantity: `${parseFloat(quantity.quantity * (_.isNil(recipe.multiplier) ? 1 : recipe.multiplier))}` }))));
         });
       });
     });

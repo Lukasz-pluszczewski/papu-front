@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 import stringify from 'javascript-stringify';
-import recipeService from '../../services/recipeService';
 import { BREAKFAST, DINNER, SNACK, SUPPER } from '../../constants/recipeTypes';
 
 import { Link } from 'react-router-dom';
@@ -27,27 +25,22 @@ class RecipeForm extends Component {
     parseRecipe: PropTypes.func,
     getNormalizedForms: PropTypes.func,
   };
-  static getDerivedStateFromProps(props, state) {
-    if (props.id !== state.id) {
-      return {
-        id: props.id,
-        title: '',
-        ingredients: '',
-        recipe: '',
-        type: null,
-      };
-    }
-
-    return null;
-  }
 
   state = {
-    id: this.props.id,
     title: '',
     ingredients: '',
     recipe: '',
-    type: null,
+    type: DINNER,
   };
+
+  componentDidMount() {
+    this.setState({
+      title: this.props.title,
+      ingredients: this.props.ingredients,
+      recipe: this.props.recipe,
+      type: this.props.type,
+    });
+  }
 
   changeRecipe = e => {
     this.setState({ recipe: e.target.value }, this.parseRecipe);
@@ -74,15 +67,6 @@ class RecipeForm extends Component {
     });
   };
 
-  clear = () => {
-    this.setState({
-      title: '',
-      ingredients: '',
-      recipe: '',
-      type: null,
-    });
-  };
-
   save = () => {
     this.props.save(
       {
@@ -91,19 +75,20 @@ class RecipeForm extends Component {
         ingredients: this.state.ingredients,
         type: this.state.type,
         id: this.props.id,
-      },
-      this.clear
+      }
     );
   };
 
   render() {
-    const collapse = <Collapse defaultActiveKey={null}>
-      <Panel header="Show parsed" key="1">
-        <pre>
-          {stringify(this.props.parsedRecipe, null, 2)}
-        </pre>
-      </Panel>
-    </Collapse>;
+    const collapse = (
+      <Collapse defaultActiveKey={null}>
+        <Panel header="Show parsed" key="1">
+          <pre>
+            {stringify(this.props.parsedRecipe, null, 2)}
+          </pre>
+        </Panel>
+      </Collapse>
+    );
 
     return (
       <Card
@@ -112,29 +97,26 @@ class RecipeForm extends Component {
             this.props.loading
               ? <Icon type="loading" />
               : <Button key="save" type="primary" icon="save" onClick={this.save}>Save</Button>,
-            this.props.id
-              ? <Link to="/"><Button key="clear" type="normal" icon="arrow-left">New</Button></Link>
-              : <Button key="clear" type="normal" icon="close" onClick={this.clear}>Clear</Button>,
           ]
         }
       >
         <Form>
           <FormItem label="Title">
-            <Input value={this.state.title || this.props.title || ''} onChange={this.changeTitle} />
-          </FormItem>
-          <FormItem label="Ingredients">
-            <TextArea value={this.state.ingredients || this.props.ingredients || ''} onChange={this.changeIngredients} autosize/>
-          </FormItem>
-          <FormItem label="Recipe">
-            <TextArea value={this.state.recipe || this.props.recipe || ''} onChange={this.changeRecipe} autosize/>
+            <Input value={this.state.title} onChange={this.changeTitle} />
           </FormItem>
           <FormItem label="Type">
-            <Select onChange={this.changeType} value={this.state.type || this.props.type || DINNER}>
+            <Select onChange={this.changeType} value={this.state.type}>
               <Option value={BREAKFAST}>Breakfest</Option>
               <Option value={DINNER}>Dinner</Option>
               <Option value={SUPPER}>Supper</Option>
               <Option value={SNACK}>Snack</Option>
             </Select>
+          </FormItem>
+          <FormItem label="Ingredients">
+            <TextArea value={this.state.ingredients} onChange={this.changeIngredients} autosize/>
+          </FormItem>
+          <FormItem label="Recipe">
+            <TextArea value={this.state.recipe} onChange={this.changeRecipe} autosize/>
           </FormItem>
           {this.props.parsing ? (<Spin tip="Loading...">{collapse}</Spin>) : (collapse)}
         </Form>
