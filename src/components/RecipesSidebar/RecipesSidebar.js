@@ -17,6 +17,8 @@ class RecipesSidebar extends Component {
   static propTypes = {
     recipes: PropTypes.arrayOf(PropTypes.object),
     loading: PropTypes.bool,
+    sidebarRecipeType: PropTypes.number,
+    setRecipeType: PropTypes.func,
     deleteRecipe: PropTypes.func,
     loadRecipes: PropTypes.func,
 
@@ -45,20 +47,23 @@ class RecipesSidebar extends Component {
     this.closeModal();
   };
 
-  handleOkModal = () => {
-    this.closeModal();
-  };
-
   handleDelete = item => {
     this.props.deleteRecipe(item);
   };
 
   handleTypeChange = type => {
-    const query = {};
-    if (!_.isNil(type)) {
-      query.type = type;
-    }
+    const query = {
+      type,
+    };
+
+    this.props.setRecipeType(type);
     this.props.loadRecipes(query);
+  };
+
+  handleSave = recipe => {
+    this.props.save(recipe, () => {
+      console.log('closing....') || this.handleCancelModal()
+    });
   };
 
   renderItem = item => (
@@ -70,7 +75,6 @@ class RecipesSidebar extends Component {
   );
 
   renderHeader = () => {
-
     return (
       <div className="RecipesSidebar__header">
         <h4 className="RecipesSidebar__headerTitle">Recipes</h4>
@@ -79,6 +83,7 @@ class RecipesSidebar extends Component {
           className="RecipesSidebar__headerTypeSelect"
           placeholder="Any type"
           optionFilterProp="children"
+          value={this.props.sidebarRecipeType}
           onChange={this.handleTypeChange}
         >
           <Option value={null}>Any type</Option>
@@ -113,6 +118,7 @@ class RecipesSidebar extends Component {
           loading={this.props.loading}
         />
         <Modal
+          className="RecipesSidebar__modal"
           title="Edit recipe"
           visible={modalVisible}
           confirmLoading={false}
@@ -122,7 +128,7 @@ class RecipesSidebar extends Component {
           <RecipeForm
             loading={this.props.recipeSaving}
             parsing={this.props.parseRecipeLoading}
-            save={this.props.save}
+            save={this.handleSave}
             parsedRecipe={this.props.parsedRecipe}
             parseRecipe={this.props.parseRecipe}
             id={recipeOpened.id}

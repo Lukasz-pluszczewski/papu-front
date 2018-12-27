@@ -66,7 +66,7 @@ class RecipesTable extends Component {
               value={recipe.multiplier || 1}
               onChange={this.handleMultiplierChange(typeIndex, recipeIndex)}
             >
-              {_.times(10, i => <NativeOption value={i + 1}>{i + 1}</NativeOption>)}
+              {_.times(10, i => <NativeOption key={i} value={i + 1}>{i + 1}</NativeOption>)}
             </NativeSelect>
             <InputNumber
               className="RecipesTable__multiplierInput"

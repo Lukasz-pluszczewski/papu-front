@@ -10,7 +10,7 @@ const requestService = {
     if (!requestService.apiUrl) {
       return Promise.reject({ message: 'apiUrl has not been set' });
     }
-    const queryString = qs.stringify(query);
+    const queryString = qs.stringify(_.pickBy(query, el => !_.isNil(el)));
 
     const request = new Request(`${requestService.apiUrl}${path}?${queryString}`, {
       method,
