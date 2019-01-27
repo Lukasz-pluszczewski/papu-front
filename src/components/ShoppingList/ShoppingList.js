@@ -35,12 +35,15 @@ class ShoppingList extends Component {
   );
 
   render() {
-    const listData = _.map(this.props.ingredientsSums, (ingredients, ingredientName) => {
-      return {
-        content: `${ingredientName}: ${_.map(ingredients, (value, unit) => `${value}${unit}`).join(' + ')}`,
-        ingredientName,
-      };
-    });
+    const listData = _.chain(this.props.ingredientsSums)
+      .map((ingredients, ingredientName) => {
+        ingredientName = ingredientName.toLowerCase();
+        return {
+          content: `${ingredientName}: ${_.map(ingredients, (value, unit) => `${value}${unit}`).join(' + ')}`,
+          ingredientName,
+        };
+      })
+      .sortBy(el => _.deburr(el.ingredientName));
 
     return (
       <div className="ShoppingList">

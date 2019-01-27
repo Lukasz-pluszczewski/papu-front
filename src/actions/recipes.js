@@ -23,6 +23,12 @@ const actionsDefinitions = {
       .parseIngredients(recipe.ingredients)
       .then(ingredientsParsed => ({ ...recipe, ingredientsParsed })),
   },
+  setRecipeType: {
+    type: 'default',
+    result: {
+      sidebarRecipeType: 'payload',
+    },
+  },
 };
 
 export default actionsDefinitions;

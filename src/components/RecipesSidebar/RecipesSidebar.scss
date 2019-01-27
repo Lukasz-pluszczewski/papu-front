@@ -19,3 +19,12 @@
     }
   }
 }
+
+.RecipesSidebar__modal {
+  .ant-modal-body {
+    padding: 0;
+  }
+  .ant-card-bordered {
+    border: none;
+  }
+}

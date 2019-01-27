@@ -13,6 +13,7 @@ class HomePage extends Component {
   static propTypes = {
     recipes: PropTypes.arrayOf(PropTypes.object),
     parsedRecipe: PropTypes.object,
+    sidebarRecipeType: PropTypes.number,
     recipeSaving: PropTypes.bool,
     recipesLoading: PropTypes.bool,
     recipeDeleting: PropTypes.bool,
@@ -21,6 +22,7 @@ class HomePage extends Component {
     saveRecipe: PropTypes.func,
     parseRecipe: PropTypes.func,
     deleteRecipe: PropTypes.func,
+    setRecipeType: PropTypes.func,
   };
 
   componentDidMount() {
@@ -52,6 +54,9 @@ class HomePage extends Component {
   load = ({ type, ingredient } = {}) => {
     if (ingredient) {
       notification.error('Searching by ingredient not implemented yet!');
+    }
+    if (_.isUndefined(type)) {
+      type = this.props.sidebarRecipeType;
     }
     this.props.getRecipes({ type }, {
       error: () => {
@@ -90,6 +95,8 @@ class HomePage extends Component {
           loadRecipes={this.load}
           loading={isLoading}
           deleteRecipe={this.deleteRecipe}
+          sidebarRecipeType={this.props.sidebarRecipeType}
+          setRecipeType={this.props.setRecipeType}
 
           recipeLoading={this.props.recipeSaving}
           parsing={this.props.parseRecipeLoading}
@@ -119,11 +126,13 @@ export default connect(
     recipes: 'recipes.result.getRecipes',
     parseRecipeLoading: 'recipes.pending.parseRecipe',
     parsedRecipe: 'recipes.result.parseRecipe',
+    sidebarRecipeType: 'recipes.sidebarRecipeType',
   },
   {
     getRecipes: getAction('getRecipes'),
     saveRecipe: getAction('saveRecipe'),
     parseRecipe: getAction('parseRecipe'),
     deleteRecipe: getAction('deleteRecipe'),
+    setRecipeType: getAction('setRecipeType'),
   }
 )(HomePage);

@@ -15,16 +15,15 @@ const HomePage = lazy(() => import(
   '../../pages/HomePage'
 ));
 const PlanPage = lazy(() => import(
-  /* webpackChunkName: "HomePage" */
+  /* webpackChunkName: "PlanPage" */
   '../../pages/PlanPage'
 ));
 const BackupPage = lazy(() => import(
   /* webpackChunkName: "BackupPage" */
   '../../pages/BackupPage'
-  ));
+));
 
 class App extends Component {
-
   removePassword = () => {
     localStorage.setItem('password', '');
     this.loginRef.forceUpdate();
