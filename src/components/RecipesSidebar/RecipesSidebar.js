@@ -124,6 +124,7 @@ class RecipesSidebar extends Component {
           confirmLoading={false}
           onCancel={this.handleCancelModal}
           footer={null}
+          destroyOnClose
         >
           <RecipeForm
             loading={this.props.recipeSaving}
