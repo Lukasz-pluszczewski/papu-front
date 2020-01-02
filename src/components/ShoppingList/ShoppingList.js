@@ -39,7 +39,7 @@ class ShoppingList extends Component {
       .map((ingredients, ingredientName) => {
         ingredientName = ingredientName.toLowerCase();
         return {
-          content: `${ingredientName}: ${_.map(ingredients, (value, unit) => `${value}${unit}`).join(' + ')}`,
+          content: `${ingredientName}: ${_.map(ingredients, (value, unit) => `${value} ${unit}`).join(' + ')}`,
           ingredientName,
         };
       })

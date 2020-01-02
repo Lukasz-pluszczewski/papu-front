@@ -27,15 +27,16 @@ export const quantities = {
         names: ['l', 'litr', 'litrów', 'litra'],
         ratio: 1000,
       },
-      szklanka: {
-        names: ['szklanka', 'szklanek', 'szklanki'],
-        ratio: 250,
-      },
+      // szklanka: {
+      //   names: ['szklanka', 'szklanek', 'szklanki'],
+      //   ratio: 250,
+      // },
     },
   },
 };
 
 const quantitiesService = {
+  parseQuantity: quantity => parseFloat((`${quantity}`).replace(',', '.')),
   findQuantity: quantityName => {
     const results = [];
     _.forEach(quantities, (quantityDetails, quantityBase) => {
@@ -87,7 +88,7 @@ const quantitiesService = {
           if (!ingredients[ingredient.ingredient]) {
             ingredients[ingredient.ingredient] = [];
           }
-          ingredients[ingredient.ingredient].push(quantitiesService.normalizeQuantities(ingredient.quantities.map(quantity => ({ ...quantity, quantity: `${parseFloat(quantity.quantity * (_.isNil(recipe.multiplier) ? 1 : recipe.multiplier))}` }))));
+          ingredients[ingredient.ingredient].push(quantitiesService.normalizeQuantities(ingredient.quantities.map(quantity => ({ ...quantity, quantity: `${quantitiesService.parseQuantity(quantity.quantity) * (_.isNil(recipe.multiplier) ? 1 : recipe.multiplier)}` }))));
         });
       });
     });
@@ -130,7 +131,7 @@ const quantitiesService = {
           if (!sums[unit]) {
             sums[unit] = 0;
           }
-          sums[unit] += parseFloat(quantity.quantity);
+          sums[unit] += quantitiesService.parseQuantity(quantity.quantity);
         }
       });
 
