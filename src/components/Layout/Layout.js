@@ -37,7 +37,9 @@ class PageLayout extends Component {
           {this.props.breadcrumbs
             ? (
               <Breadcrumb className="Layout__breadcrumb">
-                {this.props.breadcrumbs.map(breadcrumb => (<Breadcrumb.Item key={breadcrumb}>{breadcrumb}</Breadcrumb.Item>))}
+                {this.props.breadcrumbs.map(breadcrumb => (
+                  <Breadcrumb.Item key={breadcrumb}>{breadcrumb}</Breadcrumb.Item>
+                ))}
               </Breadcrumb>
             )
             : null}
@@ -47,7 +49,7 @@ class PageLayout extends Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            Papu © 2018 Created by Łukasz Pluszczewski
+            Papu © 2020 Created by Łukasz Pluszczewski
           </Footer>
         </Layout>
       </Layout>

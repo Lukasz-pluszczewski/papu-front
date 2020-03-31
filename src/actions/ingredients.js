@@ -31,10 +31,6 @@ const actionsDefinitions = {
       'result.getNormalizedForms': {},
     },
   },
-  // baz: {
-  //   type: 'better-promise',
-  //   sync: actionParam => actionParam * 2,
-  // },
 };
 
 export default actionsDefinitions;

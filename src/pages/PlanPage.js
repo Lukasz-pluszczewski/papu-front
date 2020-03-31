@@ -82,6 +82,9 @@ class PlanPage extends Component {
   loadCurrentPlan = () => {
     this.props.getCurrentPlan(null, {
       success: ({ result }) => {
+        if (!result) {
+          return notification.info('No plan!', 'No current plan available. Generate a plan.');
+        }
         this.props.setPlan({
           plan: result.plan,
           planDays: result.numberOfDays,
@@ -169,7 +172,10 @@ class PlanPage extends Component {
   };
 
   render() {
-    const summed = _.mapValues(quantitiesService.getIngredientsFromTableData(this.props.generatedPlan), quantitiesService.findQuantitiesSums);
+    const summed = _.mapValues(
+      quantitiesService.getIngredientsFromTableData(this.props.generatedPlan),
+      quantitiesService.findQuantitiesSums
+    );
 
     return (
       <Layout
