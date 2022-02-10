@@ -27,7 +27,7 @@
     "lodash": "^4.17.11",
     "luxon": "^1.4.3",
     "moment": "^2.22.2",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "perfect-immutable": "2.0.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
